@@ -2,7 +2,7 @@
 
 	$id = $_GET['id'];
 
-	include "/include/class/class.php";
+	include "/var/www/FYP2023.com/include/class/class.php";
 
 	$studentAbsent = $attendance -> attendance_absentList($id);
 
