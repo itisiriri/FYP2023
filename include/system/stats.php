@@ -2,7 +2,7 @@
 
 	$id = $_GET['id'];
 
-	include '\include\class\class.php';
+	include "/include/class/class.php";
 
 	$studentAbsent = $attendance -> attendance_absentList($id);
 
