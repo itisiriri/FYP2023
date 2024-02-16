@@ -56,15 +56,16 @@
 				  	<th>Student Name</th>
 				  	<th>Group</th>
 				</tr>
-				<?php $count = 1;?>
+				<?php $count = 1; ?>
 				<tr>
-					<td><?php echo $count?></td>
 					<?php foreach($studentAbsent as $key => $row) { ?>
+					<td><?php echo $count; ?></td>
 					<td><?php echo $row['student_id']?></td>
 					<td><?php echo $row['student_name']?></td>
 					<td><?php echo $row['regis_group']?></td>
-					<?php } $count++;?>
+					
 				</tr>
+				<?php $count++; }  ?>
 			</table>
 
 			<br><br>
