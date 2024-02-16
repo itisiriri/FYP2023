@@ -1,150 +1,107 @@
 <!DOCTYPE html>
 <html>
-	
-	<head>
-		
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv=content-type content="text/html; charset=utf-8">
+<body>
 
-		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"></head>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<!-- Head bar -->
+	<div class="w3-top">
+	 	<div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+	  		<a class="w3-right w3-padding-large w3-large w3-theme-d2"><i class="fa"></i></a>
+	 	</div>
+	</div>
 
-		<title>Validate Attendance</title>
 
-	</head>
+	<!-- Page Container -->
+	<div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">  
 
-	<body style="margin: 50px;">
-		
-		<h1>List of Students</h1> 
-		<br>
-		<table class="table">
-			<thead>
-				<tr>
+	    <h3><b>STUDENT ATTENDANCE LIST</b></h3>
+
+	    <?php
+
+	    $id = $_GET['id'];
+
+	    $host = 'localhost';
+		$port = 3307;
+		$username = 'root';
+		$password = '';
+		$dbname = 'fyp';
+
+	    // Establish a database connection
+	    $conn = new mysqli($host, $username, $password, $dbname, $port);
+
+	    if ($conn->connect_error) {
+	        die("Connection failed: " . $conn->connect_error);
+	    }
+
+	    // Fetch the student data from the database
+	    $sql = "SELECT a.attendance_id, a.student_id, a.attendance_status, s.student_name FROM attendance a JOIN student s ON s.student_id = a.student_id WHERE course_code = '$id' ";
+
+	    $result = $conn->query($sql);
+
+	    $genList = $attendance -> attendance_gen('ITT640');
+
+	    $sql1 = "SELECT * FROM attendance a JOIN student s ON s.student_id = a.student_id JOIN lecturer l ON a.regis_group = l.regis_group WHERE a.course_code = '$id' ";
+
+	    $result1 = $conn->query($sql1);
+	    
+
+	    // Check if any results were returned
+	    if ($result->num_rows > 0) { ?>
+	    	<table class="w3-table w3-border w3-bordered">
+				<tr class="w3-light-grey ">
 					<th>No.</th>
-					<th>Student ID</th>
-					<th>Seat num</th>
-					<th>Group</th>
-					<th>Status</th>
+				  	<th>Student ID</th>
+				  	<th>Student Name</th>
+				  	<th>Table No.</th>
+				  	<th>Status</th>
 				</tr>
-			</thead>
+				<?php $count = 1;?>
+				<tr>
+					<?php while ($row = $result->fetch_assoc()) { ?>
+						<td><?php echo $count?></td>
+						<td><?php echo $row['student_id']?></td>
+						<td><?php echo $row['student_name']?></td>
+						<td></td>
+					<?php if ($row['attendance_status'] == 1) { ?>
+						<td><i class="fa fa-check"></i></td>
+					<?php } if ($row['attendance_status'] == 0) { ?>
+						<td><i class="fa fa-close" style="color:red"></i></td>
+					<?php }?>
+				</tr>
+				<?php $count++; } ?>
+			</table>
+		<?php }
+	// Create an array to store the lecturer names
+	$lecturerEmail = array();
 
-			<tbody>
-				<?php 
-					$host = 'localhost';
-					$port = 3307;
-					$username = 'root';
-					$password = '';
-					$dbname = 'fyp';
+	// Print array data
+	while($row1 = $result1->fetch_assoc()) {
+	    // Check if the lecturer name is already in the array
+	    if (!in_array($row1["lecturer_email"], $lecturerEmail)) {
+	        // If not, add the lecturer name to the array and display it 
+	        $lecturerEmail[] = $row1["lecturer_email"];?>
+	        <input type="hidden" name="item_name_<?php echo $count;?>" id="item_name_<?php echo $count;?>" value="<?php echo $row1['lecturer_email'];?>" class="form-control" readonly>
+	    <?php }
+	}
+	$query1 = mysqli_query($conn,"SELECT a.attendance_id, a.student_id, a.attendance_status, a.course_code, s.student_name FROM attendance a JOIN student s ON s.student_id = a.student_id WHERE course_code = '$id' LIMIT 1");
 
-					// Create a connection
-					$conn = mysqli_connect($host, $username, $password, $dbname, $port);
+	while($row2 = mysqli_fetch_assoc($query1)) { ?>
+	   <br>
+	    <div class="w3-center">
+	    		<!-- onclick="triggerSecondPage()" -->
+	    		<a href="/fyp/index3.php?id=<?=$row2['course_code']?>"  class="w3-button w3-black" >VALIDATE</a>
+				<iframe id="hiddenIframe" style="display:none;"></iframe>
+	    </div>
+	    <?php } ?>
+	</div>
+</body>
 
-					// Check the connection
-					if (mysqli_connect_errno()) {
-					    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-					}
+<script>
+	function triggerSecondPage() {
+	    var iframe = document.getElementById('hiddenIframe');
+	    iframe.src = "http://localhost/fyp/include/system/email.php";
+	}
+</script>
 
-					$query = "SELECT
-						a.attendance_id,
-						a.student_id,
-                        a.prog_code,
-                        a.course_code,
-                        a.regis_group,
-                        a.attendance_status,
-                        a.student_part,
-                        s.student_name,
-                        l.lecturer_id,
-                        l.lecturer_name
-					FROM
-						attendance a
-					JOIN 
-						student s ON s.student_id = a.student_id
-					JOIN 
-						lecturer l ON a.regis_group = l.regis_group
-					WHERE 
-						a.course_code = 'ITT640'";
-
-					$result = mysqli_query($conn, $query);
-
-					while ($row = mysqli_fetch_assoc($result)) {
-					    $array[$row['attendance_id']][$row['student_id']][$row['prog_code']][$row['course_code']][$row['regis_group']][$row['student_part']][$row['student_name']][$row['lecturer_id']][$row['lecturer_name']] = $row['attendance_status'];  
-					    $array1[$row['lecturer_id']][$row['lecturer_name']] = $row['attendance_status'];    
-					}
-
-					mysqli_close($conn);
-
-					$displayed_values1 = array();
-					foreach ($array1 as $lecturer_id => $lecturer_data) {
-					  	foreach ($lecturer_data as $lecturer_name => $lecturer_status) {
-					        if (!in_array($lecturer_status, $displayed_values1)) { ?>
-						                    
-						        <p><?php echo $lecturer_name ?><p>
-
-					        <?php $displayed_values1[] = $lecturer_status;
-					    	}
-					    }
-					}
-
-
-					$displayed_values = array();
-					foreach ($array as $attendance_id => $attendance_data) {
-						foreach ($attendance_data as $student_id => $student_data) {
-							foreach ($student_data as $prog_code => $prog_data) {
-								foreach ($prog_data as $course_code => $course_data) {
-									foreach ($course_data as $regis_group => $regis_data) {
-							            foreach ($regis_data as $student_part => $student_p) {
-							            	foreach ($student_p as $student_name => $student_n) {
-							            		foreach ($student_n as $lecturer_id => $lecturer_data) {
-							            			foreach ($lecturer_data as $lecturer_name => $lecturer_n) {
-										                if (!in_array($lecturer_n, $displayed_values)) { ?>
-
-										                    <?php if($lecturer_n == 1){?>
-															    <tr>
-																	<td><?php echo $attendance_id ?></td>
-																	<td><?php echo $student_id ?></td>
-																	<td><?php echo $attendance_id ?></td>
-																	<td><?php echo $regis_group ?></td>
-																	<td>
-																		<i class="fas fa-check"></i>
-										  							</td>
-																</tr>
-															<?php } else{ ?>
-																<tr>
-																	<td><?php echo $attendance_id ?></td>
-																	<td><?php echo $student_id ?></td>
-																	<td><?php echo $attendance_id ?></td>
-																	<td><?php echo $regis_group ?></td>
-																	<td>
-																		<i class="fas fa-times"></i>
-										  							</td>
-																</tr>
-															<?php }
-
-										                    $displayed_values[] = $lecturer_n;
-										                }
-										            }
-						        				}
-						    				}
-						    			}
-						    		}
-						    	}
-					        }
-					    }
-					}
-
-					?>
-			</tbody>
-		</table>
-
-		<div>
-			<button type="button">
-				<a href="http://localhost/fyp/include/system/stats.php">Validate</a>
-			</button>
-		</div>
-
-	</body>
 </html>
+
+
