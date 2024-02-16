@@ -9,22 +9,22 @@
 
     <?php
 
-
+    $id="2022937613";
     // Display contents of $_GET superglobal array for debugging
     echo "<pre>";
     print_r($_GET);
     echo "</pre>";
 
     // Check if $_GET['data'] is set
-    if (isset($_GET['id'])) {
+    if (isset($id)) {
         // Include necessary files
         include "include/system/dbConnection.php";
         include "include/class/class.php";
         include "include/system/head.php";
 
         // Check if student_id is set in $_GET['data']
-        $studentDetail = $student->student_selected($_GET['id']);
-        if (isset($studentDetail['student_id']) && $studentDetail['student_id'] == ($_GET['id'])) {
+        $studentDetail = $student->student_selected($id);
+        if (isset($studentDetail['student_id']) && $studentDetail['student_id'] == ($id)) {
             // Include content.php and timetable listing
             include "include/system/content.php";
             include "include/module/timetable/listing.php";
