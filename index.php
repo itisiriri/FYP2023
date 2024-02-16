@@ -36,7 +36,7 @@
 	    $execution_time = ($end_time - $start_time) * 1000; // Convert to milliseconds
 
 	    // Output execution time
-	    echo "<p>Execution time: " . number_format($execution_time, 2) . " milliseconds</p>";
+	    //echo "<p>Execution time: " . number_format($execution_time, 2) . " milliseconds</p>";
 
 		?>
 
