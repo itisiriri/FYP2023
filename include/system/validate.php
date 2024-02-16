@@ -36,7 +36,7 @@
 
 	    $result = $conn->query($sql);
 
-	    $genList = $attendance -> attendance_gen('ITT640');
+	    $genList = $attendance -> attendance_gen($id);
 
 	    $sql1 = "SELECT * FROM attendance a JOIN student s ON s.student_id = a.student_id JOIN lecturer l ON a.regis_group = l.regis_group WHERE a.course_code = '$id' ";
 
