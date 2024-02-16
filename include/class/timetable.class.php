@@ -52,6 +52,47 @@
 			return $row;
 
 		}
+		// function timetable_subject($data){
+		// 	$sql = "SELECT 
+		// 				* 
+		// 			FROM 
+		// 				examination e 
+		// 			JOIN 
+		// 				location l ON l.course_code = e.course_code 
+		// 			WHERE 
+		// 				l.location_leader = '$data' 
+		// 			ORDER BY 
+		// 				e.exam_date DESC
+		// 			";
+
+		// 	$result = mysqli_query($this->con, $sql);
+		// 	$row = mysqli_fetch_assoc($result);
+		// 	return $row;
+		// }
+		public function timetable_subject($data) {
+		    $data = mysqli_real_escape_string($this->con, $data);
+
+		    $sql = "SELECT 
+		                * 
+		            FROM 
+		                examination e 
+		            JOIN 
+		                location l ON l.course_code = e.course_code 
+		            WHERE 
+		                l.location_leader = '$data' 
+		            ORDER BY 
+		                e.exam_date DESC
+		            ";
+
+		    $result = mysqli_query($this->con, $sql);
+
+		    $subjects = array();
+		    while($row = mysqli_fetch_assoc($result)) {
+		        $subjects[] = $row;
+		    }
+
+		    return $subjects;
+		}
 	}
 	
 ?>
