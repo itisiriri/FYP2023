@@ -5,9 +5,9 @@
 
 		<?php
 			//error_reporting(E_ERROR | E_PARSE);
-			include "include/system/dbConnection.php";
-			include "include/class/class.php";
-			include "include/system/head.php";
+			include "/var/www/FYP2023.com/include/system/dbConnection.php";
+			include "/var/www/FYP2023.com/include/class/class.php";
+			include "/var/www/FYP2023.com/include/system/head.php";
 		?>
 
 	</head>
@@ -19,10 +19,10 @@
 			$studentDetail = $student -> student_selected($_GET['data']);
 
 			if($studentDetail['student_id'] == $_GET['data']){
-				include "include/system/content.php";
-				include "include/module/timetable/listing.php"; 
+				include "/var/www/FYP2023.com/include/system/content.php";
+				include "/var/www/FYP2023.com/include/module/timetable/listing.php"; 
 			} else {
-				include "include/system/non-content.php";
+				include "/var/www/FYP2023.com/include/system/non-content.php";
 			}
 
 		?>
@@ -32,7 +32,7 @@
 	<footer>
 
 		<?php
-			include "include/system/footer.php";
+			include "/var/www/FYP2023.com/include/system/footer.php";
 		?>
 
 	</footer>
