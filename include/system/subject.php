@@ -51,11 +51,11 @@
        	 				$exam_time = strtotime($row['exam_date'] . ' ' . $row['exam_time2']);
         				if ($exam_time > $current_time) { ?> 
 							<td>
-								<a href="/index2.php?id=<?=$row['course_code']?>"><i class="fa fa-check" style="font-size:24px"></i></a>
+								<a href="index2.php?id=<?=$row['course_code']?>"><i class="fa fa-check" style="font-size:24px"></i></a>
 							</td>
 						<?php } else { ?>
 							<td>
-								<a href="/index3.php?id=<?=$row['course_code']?>"><i class="fa fa-pie-chart" style="font-size:24px"></i></a>
+								<a href="index3.php?id=<?=$row['course_code']?>"><i class="fa fa-pie-chart" style="font-size:24px"></i></a>
 							</td>
 						<?php } ?>
 			</tr>
