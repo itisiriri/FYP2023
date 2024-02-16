@@ -20,13 +20,12 @@
 	    $id = $_GET['id'];
 
 	    $host = 'localhost';
-		$port = 3307;
-		$username = 'root';
-		$password = '';
+		$username = 'geana';
+		$password = 'MyP@ssw0rd2024';
 		$dbname = 'fyp';
 
 	    // Establish a database connection
-	    $conn = new mysqli($host, $username, $password, $dbname, $port);
+	    $conn = new mysqli($host, $username, $password, $dbname);
 
 	    if ($conn->connect_error) {
 	        die("Connection failed: " . $conn->connect_error);
