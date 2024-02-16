@@ -1,6 +1,6 @@
 <?php 
 include('dbConnection.php');
-require '\dompdf\autoload.inc.php';
+require '\var\www\FYP2023.com\dompdf\autoload.inc.php';
 use Dompdf\Dompdf;
 
 $id = $_GET['id'];
