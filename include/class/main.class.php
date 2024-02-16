@@ -28,7 +28,7 @@
 			}else{
 				$data="&data=".$value;
 			}
-			return "/fyp/main/?module=".$nextModule."&page=".$page.$data;
+			return "/main/?module=".$nextModule."&page=".$page.$data;
 		}
 		function blank_page($module=array(),$page,$value=array()){
 			if (is_array($module)) {
@@ -52,7 +52,7 @@
 			}else{
 				$data="&data=".$value;
 			}
-			return "/fyp/main/blank.php?module=".$nextModule."&page=".$page.$data;
+			return "/main/blank.php?module=".$nextModule."&page=".$page.$data;
 		}
 	}
 ?>
