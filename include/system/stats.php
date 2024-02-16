@@ -4,7 +4,7 @@
 
 	include "/include/class/class.php";
 
-	// $studentAbsent = $attendance -> attendance_absentList($id);
+	$studentAbsent = $attendance -> attendance_absentList($id);
 
 	$query = "SELECT * FROM attendance WHERE course_code = '$id' ";
 	$result = mysqli_query($conn, $query);
