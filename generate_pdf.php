@@ -1,27 +1,35 @@
 <?php
 	
-	require __DIR__ . "/vendor/autoload.php";
-	include "include/system/dbConnection.php";
-	include "include/class/class.php";
 
-	use Dompdf\Dompdf;
-	use Dompdf\Options;
+include '/var/www/FYP2023.com/include/system/dbConnection.php';
+require 'dompdf/autoload.inc.php';
+use Dompdf\Dompdf;
 
+$json_data = $_GET['data'];
+$data = json_decode($json_data, true);
 
-	$options = new Options;
-	$options -> setChroot(__DIR__);
+$id = $_GET['id'];
+$sql = mysqli_query($conn,"SELECT * FROM lecturer WHERE lecturer_id='$id'");
+$user = mysqli_fetch_assoc($sql);
 
-	$dompdf = new Dompdf($options);
+// instantiate and use the dompdf class
+$dompdf = new Dompdf();
+ob_start();
+require('pdf_details.php');
+$html =ob_get_contents();
+ob_get_clean();
 
-	$dompdf -> setPaper("A4", "portrait");
+$dompdf->loadHtml($html);
 
-	$html = file_get_contents("test.php");
-	$dompdf -> loadHtml($html);
+// (Optional) Setup the paper size and orientation
+$dompdf->setPaper('A4', 'portrait');
 
-	$dompdf -> render();
+// Render the HTML as PDF
+$dompdf->render();
 
-	$dompdf -> addInfo("Title", "Attendance");
-
-	$dompdf -> stream("attendance.pdf", ["Attachment" => 0]);
+// Output the generated PDF to Browser
+$dompdf->stream('print-details.pdf',['Attachment'=>false]);
 
 ?>
+
+
