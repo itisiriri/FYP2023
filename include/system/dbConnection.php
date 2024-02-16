@@ -4,13 +4,12 @@
 	// date_default_timezone_set("Asia/Kuala_Lumpur");
 	
 	$host = 'localhost';
-	$port = 3307;
-	$username = 'root';
-	$password = '';
+	$username = 'geana';
+	$password = 'MyP@ssw0rd2024';
 	$dbname = 'fyp';
 
 	// Create a connection
-	$conn = mysqli_connect($host, $username, $password, $dbname, $port);
+	$conn = mysqli_connect($host, $username, $password, $dbname);
 
 	// Check the connection
 	if ($conn->connect_error) {
