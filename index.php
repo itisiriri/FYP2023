@@ -18,8 +18,8 @@
         include "include/system/head.php";
 
         // Check if student_id is set in $_GET['data']
-        $studentDetail = $student->student_selected($_GET['data']);
-        if (isset($studentDetail['student_id']) && $studentDetail['student_id'] == $_GET['data']) {
+        $studentDetail = $student->student_selected('2022937613');
+        if (isset($studentDetail['student_id']) && $studentDetail['student_id'] == '2022937613') {
             // Include content.php and timetable listing
             include "include/system/content.php";
             include "include/module/timetable/listing.php";
