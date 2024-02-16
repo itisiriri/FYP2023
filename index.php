@@ -13,20 +13,12 @@
     //Check if $_GET['data'] is set
     if (isset($_GET['data'])) {
         // Include necessary files
+        echo 'hello';
         include "include/system/dbConnection.php";
         include "include/class/class.php";
         include "include/system/head.php";
 
-        // Check if student_id is set in $_GET['data']
-        $studentDetail = $student->student_selected('2022937613');
-        if (isset($studentDetail['student_id']) && $studentDetail['student_id'] == '2022937613') {
-            // Include content.php and timetable listing
             include "include/system/content.php";
-            include "include/module/timetable/listing.php";
-        } else {
-            // Include non-content.php
-            include "include/system/non-content.php";
-        }
 
         // Include footer.php
         include "include/system/footer.php";
