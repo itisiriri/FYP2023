@@ -4,9 +4,9 @@
 
 		<?php
 			//error_reporting(E_ERROR | E_PARSE);
-			include "include/system/dbConnection.php";
-			include "include/class/class.php";
-			include "include/system/head.php";
+			include "/var/www/FYP2023.com/include/system/dbConnection.php";
+			include "/var/www/FYP2023.com/include/class/class.php";
+			include "/var/www/FYP2023.com/include/system/head.php";
 		?>
 
 	</head>
@@ -14,7 +14,7 @@
 	<body>
 		
 		<?php
-			include "include/system/content2.php";
+			include "/var/www/FYP2023.com/include/system/content2.php";
 		?>
 
 	</body>
@@ -22,7 +22,7 @@
 	<footer>
 
 		<?php
-			include "include/system/footer.php";
+			include "/var/www/FYP2023.com/include/system/footer.php";
 		?>
 
 	</footer>	
