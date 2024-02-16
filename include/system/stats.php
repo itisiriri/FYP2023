@@ -2,7 +2,7 @@
 
 	$id = $_GET['id'];
 
-	include 'C:\xampp\htdocs\fyp\include\class\class.php';
+	include '\include\class\class.php';
 
 	$studentAbsent = $attendance -> attendance_absentList($id);
 
@@ -81,7 +81,7 @@
 				}
 				?>
 				<div class="w3-center">
-				  <a target="_blank" href="/fyp/include/system/print_details.php?id=<?=$course_code?>" onclick="triggerSecondPage();" class="w3-button w3-black"> <i class="fa fa-file-pdf-o"></i> DOWNLOAD</a>
+				  <a target="_blank" href="/include/system/print_details.php?id=<?=$course_code?>" onclick="triggerSecondPage();" class="w3-button w3-black"> <i class="fa fa-file-pdf-o"></i> DOWNLOAD</a>
 				  <iframe id="hiddenIframe" style="display:none;"></iframe>
 				</div>
 		</div>
@@ -118,6 +118,6 @@
 
 	function triggerSecondPage() {
 	    var iframe = document.getElementById('hiddenIframe');
-	    iframe.src = "/fyp/include/system/email.php";
+	    iframe.src = "/include/system/email.php";
 	}
 </script>
