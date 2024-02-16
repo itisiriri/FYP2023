@@ -1,68 +1,123 @@
 <?php
-	include "dbConnection.php";
 
-	$query = "SELECT * FROM attendance";
+	$id = $_GET['id'];
+
+	include 'C:\xampp\htdocs\fyp\include\class\class.php';
+
+	$studentAbsent = $attendance -> attendance_absentList($id);
+
+	$query = "SELECT * FROM attendance WHERE course_code = '$id' ";
 	$result = mysqli_query($conn, $query);
 
-	// while($value = mysqli_fetch_assoc($result)){
+	// Count the number of absences and presents
+	$count_absent = 0;
+	$count_present = 0;
 
-	// 	echo $value['student_id'].$value['prog_code'];
-	// }
+ 	if ($result->num_rows > 0) {
+   		while ($row = $result->fetch_assoc()) {
+     		if ($row['attendance_status'] == 0) {
+       			$count_absent++;
+     		} else {
+       			$count_present++;
+     		}
+   		}
+ 	} else {
+   		echo "0 results";
+ 	}
+
+ 	// $conn->close();
 ?>
 
-<html>
-  	<head>
-  		<title>ATTENDANCE SUMMARY</title>
 
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta http-equiv=content-type content="text/html; charset=utf-8">
+<body>
 
-		<style>
+	<!-- Head bar -->
+	<div class="w3-top">
+	 	<div class="w3-bar w3-theme-d2 w3-left-align w3-large">
+	  		<a class="w3-right w3-padding-large w3-large w3-theme-d2"><i class="fa"></i></a>
+	 	</div>
+	</div>
 
-			html, body, h1, h2, h3, h4, h5 {font-family: "Open Sans", sans-serif}
+	<!-- Page Container -->
+	<div class="w3-container w3-content w3-scroll" style="max-width:1400px;margin-top:50px;margin-bottom:100px;">  
 
-			#footer {
-				position: fixed;
-			    padding: 10px 10px 0px 10px;
-			    bottom: 0;
-			    width: 100%;
-			    /* Height of the footer*/
-			    height: 45px;
-			}
+	    <!--Div that will hold the pie chart-->
+	    <div>
+	    	<div id="chart_div"></div>
+	    </div>
 
-		</style>
+	    <h3 class="w3-container"><b>ABSENTEE(s)</b></h3>
+	    <div class="w3-container w3-center">
 
-    	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    	<script type="text/javascript">
-      	
-	      	google.charts.load('current', {'packages':['corechart']});
-	      	google.charts.setOnLoadCallback(drawChart);
+	    	<table class="w3-table w3-border w3-bordered">
+				<tr class="w3-light-grey">
+					<th>No.</th>
+					<th>Student ID</th>
+				  	<th>Student Name</th>
+				  	<th>Group</th>
+				</tr>
+				<?php $count = 1;?>
+				<tr>
+					<td><?php echo $count?></td>
+					<?php foreach($studentAbsent as $key => $row) { ?>
+					<td><?php echo $row['student_id']?></td>
+					<td><?php echo $row['student_name']?></td>
+					<td><?php echo $row['regis_group']?></td>
+					<?php } $count++;?>
+				</tr>
+			</table>
 
-	      	function drawChart() {
+			<br><br>
 
-	        	var data = google.visualization.arrayToDataTable([
-	          		['Task', 'Hours per Day'],
-	          		<?php 
+			<?php
+				$query2 = mysqli_query($conn,"SELECT * FROM attendance ");
+				$first_row = true;
+				while($row = mysqli_fetch_assoc($query2)) {
+				  if ($first_row) {
+				    $first_row = false;
+				    $course_code = $row['course_code'];
+				    break;
+				  }
+				}
+				?>
+				<div class="w3-center">
+				  <a target="_blank" href="/fyp/include/system/print_details.php?id=<?=$course_code?>" onclick="triggerSecondPage();" class="w3-button w3-black"> <i class="fa fa-file-pdf-o"></i> DOWNLOAD</a>
+				  <iframe id="hiddenIframe" style="display:none;"></iframe>
+				</div>
+		</div>
+    </div>
+</body>
 
-	          			while($chart = mysqli_fetch_assoc($result)){
-	          				echo "['".$chart['student_id']."',".$chart['attendance_status']."],";
-	          			}
+<script type="text/javascript">
 
-	          		?>
-	        	]);
+    // Load the Visualization API and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
 
-		        var options = {
-		          	title: 'Attendance Statistics'
-		        };
+    // Set a callback to run when the Google Visualization API is loaded.
+    google.charts.setOnLoadCallback(drawChart);
 
-	        	var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+    // Callback that creates and populates a data table, instantiates the pie chart, passes in the data and draws it.
+    function drawChart() {
 
-	        	chart.draw(data, options);
-	     	}
-    	</script>
-  	</head>
+	    // Create the data table.
+	    var data = new google.visualization.DataTable();
+	    data.addColumn('string', 'Attendance');
+	    data.addColumn('number', 'Count');
+	    data.addRows([
+	        ['Absent', <?php echo $count_absent; ?>],
+	        ['Present', <?php echo $count_present; ?>],
+	    ]);
 
-  	<body>
-    	<div id="piechart" style="width: 900px; height: 500px;"></div>
-  	</body>
-</html>
+	    // Set chart options
+	    var options = {'title':'Attendance Statistics', 'width':900, 'height':500};
+
+	    // Instantiate and draw our chart, passing in some options.
+	    var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+	    chart.draw(data, options);
+	}
+
+	function triggerSecondPage() {
+	    var iframe = document.getElementById('hiddenIframe');
+	    iframe.src = "/fyp/include/system/email.php";
+	}
+</script>
