@@ -27,7 +27,7 @@
 
 		<div class="container w3-margin-top">
 	      	<div style="margin-left: 20px; margin-top: 20px; margin-right: 20px;">
-	        	<img src="/fyp/include/images/LogoUiTM2.png" style="height:90px;width:90px" alt="Avatar">
+	        	<img src="/include/images/LogoUiTM2.png" style="height:90px;width:90px" alt="Avatar">
 	      	</div>
 
 	      	<div style="margin-top: 30px;">
