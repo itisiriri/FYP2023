@@ -3,9 +3,9 @@
 
 	<?php
 		// error_reporting(E_ERROR | E_PARSE);
-		include "/var/www/FYP2023.com/include/system/dbConnection.php";
-		include "/var/www/FYP2023.com/include/class/class.php";
-		include "/var/www/FYP2023.com/include/system/head.php";
+		include "include/system/dbConnection.php";
+		include "include/class/class.php";
+		include "include/system/head.php";
 	?>
 
 
@@ -27,7 +27,7 @@
 
 		<div class="container w3-margin-top">
 	      	<div style="margin-left: 20px; margin-top: 20px; margin-right: 20px;">
-	        	<img src="/var/www/FYP2023.com/include/images/LogoUiTM2.png" style="height:90px;width:90px" alt="Avatar">
+	        	<img src="/fyp/include/images/LogoUiTM2.png" style="height:90px;width:90px" alt="Avatar">
 	      	</div>
 
 	      	<div style="margin-top: 30px;">
