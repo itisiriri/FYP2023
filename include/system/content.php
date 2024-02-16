@@ -25,7 +25,6 @@
 
 				    <!-- Profile -->
 				    <div class="w3-card w3-round w3-white w3-table">
-
 				        <div class="w3-container">
 				         	<p class="w3-center"><img src="/fyp/include/images/<?php echo $studentDetail['student_img'] ?>" class="w3-circle" style="height:120px;width:120px" alt="Avatar"></p>
 				         	<hr>
@@ -61,7 +60,6 @@
 								</table>
 							</div>
 				    	</div>
-
 				    <!-- End Profile -->	
 				  	</div>	
 										    
