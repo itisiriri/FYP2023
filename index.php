@@ -1,42 +1,42 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <title>Debugging index.php</title>
-</head>
+	<head>
 
-<body>
+		<?php
 
-    <?php
+            $id = "2022937613";
+			error_reporting(E_ERROR | E_PARSE);
+			include "/var/www/FYP2023.com/include/system/dbConnection.php";
+			include "/var/www/FYP2023.com/include/class/class.php";
+			include "/var/www/FYP2023.com/include/system/head.php";
+		?>
 
-    $id="2022937613";
-    // Display contents of $_GET superglobal array for debugging
-    echo "<pre>";
-    print_r($id);
-    echo "</pre>";
+	</head>
+	
+	<body>
 
-    // Check if $_GET['data'] is set
-    if (isset($id)) {
-        // Include necessary files
-        include "include/system/dbConnection.php";
-        include "include/class/class.php";
-        include "include/system/head.php";
+		<?php
 
-        // Check if student_id is set in $_GET['data']
-        $studentDetail = $student->student_selected($id);
-        if (isset($studentDetail['student_id']) && $studentDetail['student_id'] == ($id)) {
-            // Include content.php and timetable listing
-            include "include/system/content.php";
-            include "include/module/timetable/listing.php";
-        } else {
-            // Include non-content.php
-            include "include/system/non-content.php";
-        }
+			$studentDetail = $student -> student_selected($id);
 
-        // Include footer.php
-        include "include/system/footer.php";
-    } else {
-        // Display an error message if $_GET['data'] is not set
-        echo "Error: Missing data parameter.";
-    }
-    ?>
+			if($studentDetail['student_id'] == $id){
+				include "/var/www/FYP2023.com/include/system/content.php";
+				include "/var/www/FYP2023.com/include/module/timetable/listing.php"; 
+			} else {
+				include "/var/www/FYP2023.com/include/system/non-content.php";
+			}
+
+		?>
+
+	</body>
+
+	<footer>
+
+		<?php
+			include "/var/www/FYP2023.com/include/system/footer.php";
+		?>
+
+	</footer>
+
+</html>
