@@ -1,23 +1,29 @@
 <!DOCTYPE html>
 <html>
 
+<head>
+    <title>Debugging index.php</title>
+</head>
+
 <body>
 
     <?php
-    var_dump($_GET);
 
-    error_reporting(E_ERROR | E_PARSE);    
+    // Display contents of $_GET superglobal array for debugging
+    echo "<pre>";
+    print_r($_GET);
+    echo "</pre>";
 
-    $id = "2022937613";
-
-    if (isset($id)) {
+    // Check if $_GET['data'] is set
+    if (isset($_GET['data'])) {
         // Include necessary files
         include "include/system/dbConnection.php";
         include "include/class/class.php";
         include "include/system/head.php";
 
-        $studentDetail = $student->student_selected($id);
-        if (isset($studentDetail['student_id']) && $studentDetail['student_id'] == $id) {
+        // Check if student_id is set in $_GET['data']
+        $studentDetail = $student->student_selected($_GET['data']);
+        if (isset($studentDetail['student_id']) && $studentDetail['student_id'] == $_GET['data']) {
             // Include content.php and timetable listing
             include "include/system/content.php";
             include "include/module/timetable/listing.php";
@@ -26,12 +32,10 @@
             include "include/system/non-content.php";
         }
 
+        // Include footer.php
         include "include/system/footer.php";
     } else {
+        // Display an error message if $_GET['data'] is not set
         echo "Error: Missing data parameter.";
     }
     ?>
-
-</body>
-
-</html>
