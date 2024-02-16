@@ -88,7 +88,7 @@
 	   <br>
 	    <div class="w3-center">
 	    		<!-- onclick="triggerSecondPage()" -->
-	    		<a href="/fyp/index3.php?id=<?=$row2['course_code']?>"  class="w3-button w3-black" >VALIDATE</a>
+	    		<a href="/index3.php?id=<?=$row2['course_code']?>"  class="w3-button w3-black" >VALIDATE</a>
 				<iframe id="hiddenIframe" style="display:none;"></iframe>
 	    </div>
 	    <?php } ?>
@@ -98,7 +98,7 @@
 <script>
 	function triggerSecondPage() {
 	    var iframe = document.getElementById('hiddenIframe');
-	    iframe.src = "http://localhost/fyp/include/system/email.php";
+	    iframe.src = "/include/system/email.php";
 	}
 </script>
 
