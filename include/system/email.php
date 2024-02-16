@@ -12,11 +12,11 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-require 'C:\xampp\htdocs\fyp\PHPMailer\src\PHPMailer.php';
-require 'C:\xampp\htdocs\fyp\PHPMailer\src\Exception.php';
-require 'C:\xampp\htdocs\fyp\PHPMailer\src\SMTP.php';
+require '\PHPMailer\src\PHPMailer.php';
+require '\PHPMailer\src\Exception.php';
+require '\PHPMailer\src\SMTP.php';
 
-require 'C:\xampp\htdocs\fyp\vendor\autoload.php';
+require '\vendor\autoload.php';
 
 //Create a new PHPMailer instance
 $mail = new PHPMailer();
