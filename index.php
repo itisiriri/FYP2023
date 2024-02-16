@@ -13,7 +13,7 @@ $id = "2022937613";
 
     // Display contents of $_GET superglobal array for debugging
     echo "<pre>";
-    print_r($_GET);
+    print_r($id);
     echo "</pre>";
 
     // Check if $_GET['data'] is set
