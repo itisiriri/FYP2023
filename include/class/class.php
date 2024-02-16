@@ -1,5 +1,5 @@
 <?php
-	$dir	= $_SERVER['DOCUMENT_ROOT'].'/var/www/FYP2023.com/include/class/';
+	$dir	= $_SERVER['DOCUMENT_ROOT'].'/include/class/';
 	$files	= scandir($dir);
 
 	foreach ($files as $row) {
