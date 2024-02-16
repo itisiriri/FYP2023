@@ -26,7 +26,7 @@
 				    <!-- Profile -->
 				    <div class="w3-card w3-round w3-white w3-table">
 				        <div class="w3-container">
-				         	<p class="w3-center"><img src="/fyp/include/images/<?php echo $studentDetail['student_img'] ?>" class="w3-circle" style="height:120px;width:120px" alt="Avatar"></p>
+				         	<p class="w3-center"><img src="/include/images/<?php echo $studentDetail['student_img'] ?>" class="w3-circle" style="height:120px;width:120px" alt="Avatar"></p>
 				         	<hr>
 					        <div class="w3-responsive">
 								<table class="w3-table w3-margin-bottom">
