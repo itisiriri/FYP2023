@@ -4,7 +4,7 @@
 	<head>
 
 		<?php
-			//error_reporting(E_ERROR | E_PARSE);
+			error_reporting(E_ERROR | E_PARSE);
 			include "/var/www/FYP2023.com/include/system/dbConnection.php";
 			include "/var/www/FYP2023.com/include/class/class.php";
 			include "/var/www/FYP2023.com/include/system/head.php";
