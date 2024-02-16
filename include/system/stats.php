@@ -82,7 +82,7 @@
 				}
 				?>
 				<div class="w3-center">
-				  <a target="_blank" href="/var/www/FYP2023.com/include/system/print_details.php?id=<?=$course_code?>" onclick="triggerSecondPage();" class="w3-button w3-black"> <i class="fa fa-file-pdf-o"></i> DOWNLOAD</a>
+				  <a target="_blank" href="/include/system/print_details.php?id=<?=$course_code?>" onclick="triggerSecondPage();" class="w3-button w3-black"> <i class="fa fa-file-pdf-o"></i> DOWNLOAD</a>
 				  <iframe id="hiddenIframe" style="display:none;"></iframe>
 				</div>
 		</div>
