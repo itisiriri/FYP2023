@@ -1,6 +1,6 @@
 <?php 
 include('dbConnection.php');
-require 'C:\xampp\htdocs\fyp\dompdf\autoload.inc.php';
+require '\dompdf\autoload.inc.php';
 use Dompdf\Dompdf;
 
 $id = $_GET['id'];
