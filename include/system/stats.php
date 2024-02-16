@@ -1,29 +1,29 @@
 <?php
 
-	// $id = $_GET['id'];
+	$id = $_GET['id'];
 
 	// include "/include/class/class.php";
 
 	// $studentAbsent = $attendance -> attendance_absentList($id);
 
-	// $query = "SELECT * FROM attendance WHERE course_code = '$id' ";
-	// $result = mysqli_query($conn, $query);
+	$query = "SELECT * FROM attendance WHERE course_code = '$id' ";
+	$result = mysqli_query($conn, $query);
 
-	// // Count the number of absences and presents
-	// $count_absent = 0;
-	// $count_present = 0;
+	// Count the number of absences and presents
+	$count_absent = 0;
+	$count_present = 0;
 
- // 	if ($result->num_rows > 0) {
- //   		while ($row = $result->fetch_assoc()) {
- //     		if ($row['attendance_status'] == 0) {
- //       			$count_absent++;
- //     		} else {
- //       			$count_present++;
- //     		}
- //   		}
- // 	} else {
- //   		echo "0 results";
- // 	}
+ 	if ($result->num_rows > 0) {
+   		while ($row = $result->fetch_assoc()) {
+     		if ($row['attendance_status'] == 0) {
+       			$count_absent++;
+     		} else {
+       			$count_present++;
+     		}
+   		}
+ 	} else {
+   		echo "0 results";
+ 	}
 
  	// $conn->close();
 ?>
