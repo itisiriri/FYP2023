@@ -22,6 +22,24 @@
 			return $row;
 		}
 
+		function attendance_absentList($data){
+			$sql = "SELECT 
+						*
+					FROM
+						attendance a
+					JOIN
+						student s ON s.student_id = a.student_id
+					WHERE
+						attendance_status = '0'
+					AND 
+						course_code = '$data'
+					";
+
+			$result = mysqli_query($this->con, $sql);
+			$row = mysqli_fetch_all($result,MYSQLI_ASSOC);
+			return $row;
+		}
+
 		function attendance_update($data){
 			$sql = "UPDATE
 						`attendance`
@@ -76,11 +94,27 @@
 					FROM
 						attendance a
 					JOIN 
-						student s ON s.regis_group = a.regis_group
+						student s ON s.student_id = a.student_id
 					JOIN 
 						lecturer l ON a.regis_group = l.regis_group
 					WHERE 
 						a.course_code = '$data' 
+					";
+
+			$result = mysqli_query($this->con, $sql);
+			$row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+			return $row;
+		}
+
+		function attendance_val($data){
+			$sql = "SELECT 
+						a.attendance_id, a.student_id, a.attendance_status, s.student_name 
+					FROM 
+						attendance a 
+					JOIN 
+						student s ON s.student_id = a.student_id 
+					WHERE 
+						course_code = '$data'
 					";
 
 			$result = mysqli_query($this->con, $sql);
